@@ -2,3 +2,23 @@
     flex: 1 1 auto;
   }
   
+.main-body {
+  padding-top: 20px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.action {
+  display: flex;
+  gap: 5px;
+}
+
+.table-container {
+  width: 90%;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

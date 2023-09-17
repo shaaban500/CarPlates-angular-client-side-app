@@ -23,4 +23,8 @@ export class PlateService {
   getCarTypes(): Observable<any[]> {
     return this._http.get<any[]>('https://localhost:7137/CarTypes/GetAll');
   }
+
+  getPlatesList(): Observable<any> {
+    return this._http.get('https://localhost:7137/CarPlates/GetAll');
+  }
 }
