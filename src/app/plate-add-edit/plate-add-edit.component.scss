@@ -11,10 +11,20 @@
     }
 }
 
-.action {
+.actions {
     padding: 0px 25px 20px;
 
     button{
         flex: 1;
     }
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.padding-top-20 {
+    padding-top: 20px;
 }
