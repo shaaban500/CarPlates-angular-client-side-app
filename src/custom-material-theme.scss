@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
+// src/custom-material-theme.scss
+
+@import '~@angular/material/theming';
+
+// Define the 'Tajawal' font family
+$custom-font-family: 'Tajawal', sans-serif;
+
+// Import the default Material Design theme
+@include mat-core();
+
+// Customize the Material theme
+$custom-typography: mat-typography-config(
+  $font-family: $custom-font-family,
+  // You can customize other typography properties here as needed
+);
+
+// Include your custom typography in the theme
+$custom-theme: mat-light-theme(
+  (
+    // Customize your colors here if needed
+  ),
+  $custom-typography
+);
+
+// Apply the custom theme
+@include angular-material-theme($custom-theme);
