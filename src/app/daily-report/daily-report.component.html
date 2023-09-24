@@ -1,0 +1,15 @@
+<table>
+    <thead>
+      <tr>
+        <th>Car Type</th>
+        <th *ngFor="let state of dailyReport.carStates">{{ state.state }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let type of dailyReport.carTypes; let i = index">
+        <th>{{ type.type }}</th>
+        <td *ngFor="let report of dailyReport.dailyReport.slice(i * dailyReport.carStates.length, (i + 1) * dailyReport.carStates.length)">{{ report }}</td>
+      </tr>
+    </tbody>
+  </table>
+  

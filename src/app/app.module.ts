@@ -21,12 +21,18 @@ import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatSort, MatSortModule} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {Component, OnInit, ViewChild } from '@angular/core';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { DailyReportComponent } from './daily-report/daily-report.component';
+import { RouterModule, Routes } from '@angular/router';
+import { PaltesComponent } from './paltes/paltes.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    PlateAddEditComponent
+    PlateAddEditComponent,
+    DailyReportComponent,
+    PaltesComponent
   ],
   imports: [
     BrowserModule,
@@ -44,10 +50,11 @@ import {Component, OnInit, ViewChild } from '@angular/core';
     HttpClientModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatFormFieldModule,
   ],
   providers: [
-    PlateService
+    PlateService,
   ],
   bootstrap: [AppComponent]
 })

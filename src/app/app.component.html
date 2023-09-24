@@ -1,34 +1,68 @@
 <mat-toolbar color="primary">
   <span> اللوحات المعدنية </span>
   <span class="example-spacer"></span>
-  <button mat-raised-button (click)="openAddEditPlateForm()">
-    إضافة لوحة
-  </button>
+  <div class="flex-row gap20px">
+    <button mat-raised-button (click)="openAddEditPlateForm()">
+      إضافة لوحة
+    </button>
+    <button mat-raised-button>
+      اليومية  
+    </button>
+  </div>
 </mat-toolbar>
+<!-- src/app/app.component.html -->
 
-<div class="main-body">
-  <mat-form-field>
-    <mat-label>البحث</mat-label>
-    <input matInput (keyup)="applyFilter($event)"  #input>
-  </mat-form-field>
+<nav>
+  <a routerLink="/daily-report" routerLinkActive="active">Daily Report</a>
+  <a routerLink="/plate-add-edit" routerLinkActive="active">Plate</a>
+</nav>
+<router-outlet></router-outlet>
 
-  <div class="table-container center">
+<div class="flex-column center mg-top20px">
+
+  <div class="center gap10px">
+    <mat-form-field appearance="outline">
+      <mat-label>البحث </mat-label>
+      <input matInput (keyup)="applyFilter($event)" #input>
+    </mat-form-field>
+
+  <form [formGroup]="searchForm" (ngSubmit)="onSearchFormSubmit()" class="center gap10px">
+    <mat-form-field appearance="outline">
+      <mat-label> نوع المركبة </mat-label>
+      <mat-select formControlName="carTypeId">
+          <mat-option *ngFor="let val of carTypes" [value]="val.id"> {{val.type}}
+          </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label> حالة المركبة </mat-label>
+        <mat-select formControlName="carStateId">
+            <mat-option *ngFor="let val of carStates" [value]="val.id"> {{val.state}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <button mat-fab color="primary" type="submit" class="mg-bottom20px">
+      <mat-icon>search</mat-icon>
+    </button>    
+
+  </form>
+    
+    
+  </div>
+    
+  <div class="center gap20px mg-top20px font20px">
+    <span> {{ carTypeValue }}  -  {{ carStateValue }} </span>
+  </div>
+
+
+  <div class="width90 mg-top20px">
     <table mat-table [dataSource]="dataSource" matSort>
 
       <!-- ID Column -->
-      <ng-container matColumnDef="id">
+      <ng-container matColumnDef="id" class="hide">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
         <td mat-cell *matCellDef="let row"> {{row.id}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="carTypeId">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> carTypeId </th>
-        <td mat-cell *matCellDef="let row"> {{row.carTypeId}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="carStateId">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> carStateId </th>
-        <td mat-cell *matCellDef="let row"> {{row.carStateId}} </td>
       </ng-container>
 
       <!-- Progress Column -->
@@ -69,15 +103,29 @@
         <td mat-cell *matCellDef="let row"> {{row.ownerAdress}} </td>
       </ng-container>
 
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> تعديل </th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-icon-button color="primary">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
       <!-- Row shown when there is no matching data. -->
       <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        <td class="mat-cell" colspan="4">لا يوجد بيانات مطابقة للبحث عن:  "{{input.value}}"</td>
       </tr>
     </table>
 
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
   </div>
 </div>
+
+
