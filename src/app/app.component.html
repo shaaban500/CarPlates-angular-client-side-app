@@ -1,13 +1,7 @@
-<div class="flex-row bg-white padding1 primary font20px bold700">
+<div class="flex-row width100 bg-white padding1 primary font20px bold700">
   <img src="./assets/logo.png" class="logo"/>
-  <span class="example-spacer"></span>
-  <div class="flex-row gap7">
-    <div class="hover flex-column align-center" (click)="openAddEditPlateForm()">
-      <a routerLink="/plate-add-edit" class="center gap1">
-        <span class="material-symbols-rounded"> new_window </span>
-        <span class="font20px"> اللوحات المعدنية </span>
-      </a>
-    </div>
+  
+  <div class="flex-row justify-content-end align-center gap7 width100">
     <div class="hover flex-column align-center">
       <a routerLink="/daily-report" class="center gap1"> 
         <span class="material-symbols-rounded"> calendar_month </span>
@@ -15,12 +9,19 @@
       </a>
     </div>
     <div class="hover flex-column align-center">
-      <a routerLink="/app" class="center gap1">
-        <span class="material-symbols-rounded"> home </span>
-        <span class="font20px"> اللجان </span>   
+      <a routerLink="/plates" class="center gap1">
+        <span class="material-symbols-rounded"> pin </span>
+        <span class="font20px"> اللوحات المعدنية </span>
+      </a>
+    </div>
+    <div class="hover flex-column align-center">
+      <a routerLink="/executed-plates" class="center gap1">
+        <span class="material-symbols-rounded"> delete_forever </span>
+        <span class="font20px"> لجان الإعدام </span>   
       </a>
     </div>
   </div>
+
 </div>
 
 <router-outlet></router-outlet>

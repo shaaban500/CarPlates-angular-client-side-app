@@ -10,7 +10,9 @@ import { OnInit } from '@angular/core';
 export class DailyReportComponent implements OnInit{
   
   dailyReport: any;
-  constructor(private _dailyReportService: DailyReportService) {
+
+  constructor(
+    private _dailyReportService: DailyReportService) {
   }
 
   ngOnInit(): void {

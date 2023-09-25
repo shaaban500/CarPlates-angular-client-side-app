@@ -25,6 +25,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { DailyReportComponent } from './daily-report/daily-report.component';
 import { RouterModule, Routes } from '@angular/router';
 import { PaltesComponent } from './paltes/paltes.component';
+import { ExecutedPlatesComponent } from './executed-plates/executed-plates.component';
+import { ExecutedPlatesAddEditComponent } from './executed-plates-add-edit/executed-plates-add-edit.component';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import { PaltesComponent } from './paltes/paltes.component';
     AppComponent,
     PlateAddEditComponent,
     DailyReportComponent,
-    PaltesComponent
+    PaltesComponent,
+    ExecutedPlatesComponent,
+    ExecutedPlatesAddEditComponent
   ],
   imports: [
     BrowserModule,

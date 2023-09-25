@@ -1,0 +1,40 @@
+<div mat-dialog-title class="center padding-top-20">
+    <h2> بيانات اللوحة المعدنية </h2>
+</div>
+
+<form [formGroup]="plateForm" (ngSubmit)="onFormSubmit()">
+    <input hidden formControlName="id">
+    <div mat-dialog-content class="content">
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label> نوع المركبة </mat-label>
+                <mat-select formControlName="carTypeId">
+                    <mat-option *ngFor="let val of carTypes" [value]="val.id"> {{val.type}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label> الأرقام </mat-label>
+                <input matInput type="number" formControlName="numbers">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label> الحروف </mat-label>
+                <input matInput type="text" formControlName="letters">
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label> التاريخ </mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="date">
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+    </div>
+    <div mat-dialog-actions class="actions">
+        <button mat-raised-button color="primary" type="submit"> حفظ </button>
+        <button mat-raised-button> إالغاء </button>
+    </div>
+</form>

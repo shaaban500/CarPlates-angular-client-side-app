@@ -379,6 +379,13 @@ a {
 .width25 {
     width: 25%;
 }
+.width15 {
+    width: 15%;
+}
+
+.width17 {
+    width: 17%;
+}
 
 .width10 {
     width: 10%;
@@ -708,38 +715,22 @@ table {
     box-shadow: var(--shadow-1);
 }
 
-.border-top-left-radius{
-    border-top-left-radius: var(--card-border-radius);
-}
-
-.border-top-right-radius {
-    border-top-right-radius: var(--card-border-radius);
-}
-
 th, td {
     text-align: center;
     padding: 10px 10px;
+    min-height: 50px;
+    font-size: 1.5rem;
+    background-color: var(--color-white);
 }
 
 thead, th {
-    font-size: 1.5rem;
-    color: var(--color-primary);
     min-height: 50px;
-    background-color: var(--color-light);
+    font-size: 1.5rem;
     font-weight: normal;
+    color: var(--color-primary);
+    background-color: var(--color-light);
 }
 
-td {
-    font-size: 1.5rem;
-    background-color: var(--color-white);
-    min-height: 50px;
-}
-
-th {
-    font-weight: normal;
-    background-color: var(--color-light);
-    color: var(--color-primary);
-}
 
 td .div, .td span {
     font-size: 1.5rem;
@@ -1218,9 +1209,7 @@ input[type="color"] {
         font-size: 1px;
     }
 
-    th, td {
-        padding: 2px 2px;
-    }
+  
 
     .font20px {
         font-size: 8px;

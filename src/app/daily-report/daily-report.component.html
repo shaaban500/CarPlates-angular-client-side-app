@@ -1,5 +1,7 @@
-<div class="flex-column align-center mg-top20"> 
-    <table class="width75">
+<div class="flex-column align-center gap3"> 
+    <span class="center font20px gold bold">  </span>
+    <span class="center font20px gold bold"> كشف عهدة مخزن اللوحات المعدنية المؤمنة </span>
+    <table class="width50 mg-top20">
       <thead>
         <tr>
           <th> النوع </th>
@@ -11,10 +13,14 @@
           <th>{{ type.type }}</th>
           <td *ngFor="let report of dailyReport.dailyReport.slice(i * dailyReport.carStates.length, (i + 1) * dailyReport.carStates.length)">{{ report }}</td>
         </tr>
+        <th> الإجمالي </th>
+        <td *ngFor="let count of dailyReport.stateCountList; let i = index">
+          {{ count }}
+        </td>
       </tbody>
     </table>
 
-    <button (click)="printTable()" class="center gap2 width20 bg-primary white padding1 card-radius mg-top20 font18px bold700">
+    <button (click)="printTable()" class="center gap2 width20 bg-primary white padding1 card-radius font20px bold700">
       <span class="material-symbols-rounded"> print </span>
       <span> طباعة اليومية </span>
     </button>

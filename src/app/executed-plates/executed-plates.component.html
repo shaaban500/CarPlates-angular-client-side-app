@@ -1,0 +1,103 @@
+
+<div class="flex-column align-center gap3 mg-top20 width100">
+    <div class="flex-column align-center gap3 width90">
+      <div class="center gap3">
+      <mat-form-field appearance="outline">
+        <mat-label>البحث </mat-label>
+        <input matInput (keyup)="applyFilter($event)" #input>
+      </mat-form-field>
+        
+      <form [formGroup]="searchForm" (ngSubmit)="onSearchFormSubmit()" class="center gap3">
+        <mat-form-field appearance="outline">
+          <mat-label> نوع المركبة </mat-label>
+          <mat-select formControlName="carTypeId">
+            <mat-option *ngFor="let val of carTypes" [value]="val.id"> {{val.type}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+          
+        <mat-form-field appearance="outline">
+            <mat-label> السنة </mat-label>
+            <mat-select formControlName="selectedYear">
+              <mat-option *ngFor="let val of years" [value]="val"> {{val}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label> رقم اللجنة </mat-label>
+            <mat-select formControlName="selectedNumber">
+              <mat-option *ngFor="let val of numbers" [value]="val"> {{val}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <button type="submit" class="center bg-primary padding1 white radius50">
+            <span class="material-symbols-rounded">search</span>
+        </button>    
+      </form>
+    </div>
+    
+      <div class="flex-row width100 align-center font20px">
+        <span class="flex-row justify-content-end width100 font20px bold700 primary padding1"> {{ carTypeValue }} </span>
+        <div class="flex-row justify-content-end width100">
+          <button (click)="openAddEditExecutedPlateForm()" class="center gap1 width30 bg-primary white padding1 card-radius font20px bold700">
+            <span class="material-symbols-rounded"> add_box </span>
+            <span> إضافة لوحة </span>
+          </button>
+        </div>
+      </div>
+        
+      <div id="printContent" class="width100">
+        <table mat-table [dataSource]="dataSource" matSort class="width100">
+            
+            <ng-container matColumnDef="id" >
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="no-print"> ID </th>
+            <td mat-cell *matCellDef="let row" class="no-print"> {{row.id}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="letters">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> الحروف </th>
+            <td mat-cell *matCellDef="let row"> {{row.letters}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="numbers">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> الأرقام </th>
+            <td mat-cell *matCellDef="let row"> {{row.numbers}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> التاريخ </th>
+            <td mat-cell *matCellDef="let row"> {{row.date | date}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="no-print"> تعديل </th>
+            <td mat-cell *matCellDef="let row" class="no-print">
+                <button mat-icon-button color="primary">
+                <span class="material-symbols-rounded">edit</span>
+                </button>
+                <button mat-icon-button color="warn">
+                <span class="material-symbols-rounded">delete</span>
+                </button>
+            </td>
+            </ng-container>
+    
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+            <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">لا يوجد بيانات مطابقة للبحث عن:  "{{input.value}}"</td>
+            </tr>
+        </table>
+    </div>
+  
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users" class="width100"></mat-paginator>
+      
+      <button (click)="printDivContent()" class="center gap1 width20 bg-primary white padding1 card-radius font20px bold700">
+        <span class="material-symbols-rounded"> print </span>
+        <span> طباعة </span>
+      </button>
+
+    </div>
+</div>
