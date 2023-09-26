@@ -1,11 +1,12 @@
-<div mat-dialog-title class="center padding-top-20">
+<div  class="center mg-top50">
     <h2> بيانات اللوحة المعدنية </h2>
 </div>
 
+
 <form [formGroup]="plateForm" (ngSubmit)="onFormSubmit()">
-    <input hidden formControlName="id">
-    <div mat-dialog-content class="content">
-        <div class="row">
+    <input type="number" hidden formControlName="id" value="0">
+    <div class="flex-column align-center gap3 width100 padding30">
+        <div class="center width100 gap3">
             <mat-form-field appearance="outline">
                 <mat-label> نوع المركبة </mat-label>
                 <mat-select formControlName="carTypeId">
@@ -13,28 +14,36 @@
                     </mat-option>
                 </mat-select>
             </mat-form-field>
-        </div>
-        <div class="row">
-            <mat-form-field appearance="outline">
-                <mat-label> الأرقام </mat-label>
-                <input matInput type="number" formControlName="numbers">
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-                <mat-label> الحروف </mat-label>
-                <input matInput type="text" formControlName="letters">
-            </mat-form-field>
-        </div>
-        <div class="row">
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" class="width40">
                 <mat-label> التاريخ </mat-label>
                 <input matInput [matDatepicker]="picker" formControlName="date">
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
         </div>
+        <div class="center width100 gap3">
+            <mat-form-field appearance="outline">
+                <mat-label> الأرقام </mat-label>
+                <input matInput type="text" formControlName="numbers">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label> الحروف </mat-label>
+                <input matInput type="text" formControlName="letters">
+            </mat-form-field>
+        </div>
+        <div class="center width100 gap3">
+            <mat-form-field appearance="outline">
+                <mat-label> رقم اللجة </mat-label>
+                <input matInput type="number" formControlName="executionYear">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label> سنة اللجنة </mat-label>
+                <input matInput type="number" formControlName="executionNumber">
+            </mat-form-field>
+        </div>
     </div>
-    <div mat-dialog-actions class="actions">
-        <button mat-raised-button color="primary" type="submit"> حفظ </button>
-        <button mat-raised-button> إالغاء </button>
+    <div class="center width100 gap3 padding30">
+        <button type="submit" class="center gap2 width30  height50px bg-primary white padding1 card-radius font20px bold700"> حفظ </button>
+        <button class="center gap2 width30 height50px bg-gray white padding1 card-radius font20px bold700"> إلغاء </button>
     </div>
 </form>

@@ -55,8 +55,10 @@ body {
     background: var(--color-light);
     min-height: 100vh;
     color: var(--color-dark);
+    
+    
+    
 }
-
 
 header {
     font-weight: 700;
@@ -171,6 +173,10 @@ small {
 
 .bg-white {
     background: var(--color-white);
+}
+
+.bg-gray{
+    background: var(--color-gray-dark);
 }
 
 .bg-primary {
@@ -418,6 +424,10 @@ a {
 
 .height50px {
     height: 50px;
+}
+
+.height40px {
+    height: 40px;
 }
 
 .height40 {

@@ -53,15 +53,13 @@ export class PlateAddEditComponent implements OnInit {
     if (this.plateForm.valid) {
       this._plateService.addPlate(this.plateForm.value).subscribe({
         next: (val: any) => {
-          alert('7a7aaaaaaaaaaaa');
           this._dialogref.close();
+          alert('7a7aaaaaaaaaaaa');
         },
         error: (err: any) => {
           console.error(err);
         }
       });
-    } else {
-      console.log("Form is invalid");
     }
   }
 }

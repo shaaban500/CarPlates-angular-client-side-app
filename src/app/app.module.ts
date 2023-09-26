@@ -27,6 +27,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PaltesComponent } from './paltes/paltes.component';
 import { ExecutedPlatesComponent } from './executed-plates/executed-plates.component';
 import { ExecutedPlatesAddEditComponent } from './executed-plates-add-edit/executed-plates-add-edit.component';
+import { EntryPageComponent } from './entry-page/entry-page.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { ExecutedPlatesAddEditComponent } from './executed-plates-add-edit/execu
     DailyReportComponent,
     PaltesComponent,
     ExecutedPlatesComponent,
-    ExecutedPlatesAddEditComponent
+    ExecutedPlatesAddEditComponent,
+    EntryPageComponent
   ],
   imports: [
     BrowserModule,

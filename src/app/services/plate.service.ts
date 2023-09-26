@@ -41,14 +41,12 @@ export class PlateService {
 
   getExecutedPlatesList(params?: any): Observable<any> {
     if (!params) {
-      console.log(1);
-      return this._http.post<any>('https://localhost:44334/ExecutedPlates/GetAll?carTypeId=1', null);
+      return this._http.post<any>(`https://localhost:44334/ExecutedPlates/GetAll?carTypeId=1&executionYear=1&executionNumber=1`,null);  
     }
 
     const carTypeId = parseInt(params.carTypeId.toString());
     const year = parseInt(params.selectedYear.toString());
     const num = parseInt(params.selectedNumber.toString());
-    console.log(2);
 
     return this._http.post<any>(`https://localhost:44334/ExecutedPlates/GetAll?carTypeId=${carTypeId}&executionYear=${year}&executionNumber=${num}`,null);  
     

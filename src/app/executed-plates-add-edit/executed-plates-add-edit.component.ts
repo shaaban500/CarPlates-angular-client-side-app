@@ -25,6 +25,8 @@ export class ExecutedPlatesAddEditComponent implements OnInit {
         letters: '',
         numbers: '',
         date: '',
+        executionYear: '',
+        executionNumber: '',
       });
 
     }
@@ -41,17 +43,12 @@ export class ExecutedPlatesAddEditComponent implements OnInit {
 
   onFormSubmit() {
     if (this.plateForm.valid) {
-      this._plateService.addPlate(this.plateForm.value).subscribe({
+      this._plateService.addExecutedPlate(this.plateForm.value).subscribe({
         next: (val: any) => {
-          alert('7a7aaaaaaaaaaaa');
           this._dialogref.close();
-        },
-        error: (err: any) => {
-          console.error(err);
+          alert('7a7aaaaaaaaaaaa');
         }
       });
-    } else {
-      console.log("Form is invalid");
     }
   }
 }
