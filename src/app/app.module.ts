@@ -61,6 +61,10 @@ import { EntryPageComponent } from './entry-page/entry-page.component';
   ],
   providers: [
     PlateService,
+    PaltesComponent,
+    PlateAddEditComponent,
+    ExecutedPlatesComponent,
+    ExecutedPlatesAddEditComponent
   ],
   bootstrap: [AppComponent]
 })

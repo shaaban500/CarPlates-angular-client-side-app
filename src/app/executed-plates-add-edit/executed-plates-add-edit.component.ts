@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { PlateService } from '../services/plate.service';
 import { DialogRef } from '@angular/cdk/dialog';
 import { OnInit } from '@angular/core';
+import { PaltesComponent } from '../paltes/paltes.component';
+import { ExecutedPlatesComponent } from '../executed-plates/executed-plates.component';
 
 @Component({
   selector: 'app-executed-plates-add-edit',
@@ -16,17 +18,17 @@ export class ExecutedPlatesAddEditComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private _plateService: PlateService,
-    private _dialogref: DialogRef<ExecutedPlatesAddEditComponent>
+    private _dialogref: DialogRef<ExecutedPlatesAddEditComponent>,
     ) {
 
       this.plateForm = this._formBuilder.group({
-        id: '',
-        carTypeId: '',
+        id: Number ,
+        carTypeId: Number,
         letters: '',
         numbers: '',
-        date: '',
-        executionYear: '',
-        executionNumber: '',
+        date: Date,
+        executionYear: Number,
+        executionNumber: Number,
       });
 
     }
@@ -46,7 +48,7 @@ export class ExecutedPlatesAddEditComponent implements OnInit {
       this._plateService.addExecutedPlate(this.plateForm.value).subscribe({
         next: (val: any) => {
           this._dialogref.close();
-          alert('7a7aaaaaaaaaaaa');
+          alert('تمت الإضافة بنجاح يا برنس..');
         }
       });
     }

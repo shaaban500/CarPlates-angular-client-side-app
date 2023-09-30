@@ -10,6 +10,6 @@ export class DailyReportService {
   constructor(private _http: HttpClient) { }
 
   getDailyReport(): Observable<any> {
-    return this._http.get('https://localhost:44334/CarPlates/GetDailyReport');
+    return this._http.get('https://localhost:7137/CarPlates/GetDailyReport');
   }
 }
