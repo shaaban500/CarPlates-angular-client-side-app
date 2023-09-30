@@ -22,12 +22,12 @@ export class PlateAddEditComponent implements OnInit {
     ) {
 
       this.plateForm = this._formBuilder.group({
-        id: '',
-        carTypeId: '',
-        carStateId: '',
+        id: Number,
+        carTypeId: Number,
+        carStateId: Number,
         letters: '',
         numbers: '',
-        date: '',
+        date: Date,
         ownerName: '',
         ownerAdress: '',
         ownerPhone: '',
@@ -54,7 +54,7 @@ export class PlateAddEditComponent implements OnInit {
       this._plateService.addPlate(this.plateForm.value).subscribe({
         next: (val: any) => {
           this._dialogref.close();
-          alert('7a7aaaaaaaaaaaa');
+          alert('');
         },
         error: (err: any) => {
           console.error(err);
