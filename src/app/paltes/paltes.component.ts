@@ -117,4 +117,14 @@ export class PaltesComponent implements OnInit {
     }
 
   }
+
+  deletePlate(id: number){
+    this._plateService.deletePlate(id).subscribe({
+      next: (res) =>{
+        alert("تم الحذف بنجاح يا معلم..");
+        this.getPlatesList();
+      }
+    });
+  }
+
 }

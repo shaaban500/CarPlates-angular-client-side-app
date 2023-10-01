@@ -19,6 +19,7 @@ export class ExecutedPlatesAddEditComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private _plateService: PlateService,
     private _dialogref: DialogRef<ExecutedPlatesAddEditComponent>,
+    private _executedPlatesComponent: ExecutedPlatesComponent
     ) {
 
       this.plateForm = this._formBuilder.group({
@@ -49,6 +50,7 @@ export class ExecutedPlatesAddEditComponent implements OnInit {
         next: (val: any) => {
           this._dialogref.close();
           alert('تمت الإضافة بنجاح يا برنس..');
+          this._executedPlatesComponent.getExecutedPlatesList();
         }
       });
     }

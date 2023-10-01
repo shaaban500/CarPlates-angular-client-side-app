@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { PlateService } from '../services/plate.service';
 import { DialogRef } from '@angular/cdk/dialog';
 import { OnInit } from '@angular/core';
+import { PaltesComponent } from '../paltes/paltes.component';
 
 @Component({
   selector: 'app-plate-add-edit',
@@ -18,7 +19,8 @@ export class PlateAddEditComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private _plateService: PlateService,
-    private _dialogref: DialogRef<PlateAddEditComponent>
+    private _dialogref: DialogRef<PlateAddEditComponent>,
+    private _platesComponent: PaltesComponent
     ) {
 
       this.plateForm = this._formBuilder.group({
@@ -54,7 +56,8 @@ export class PlateAddEditComponent implements OnInit {
       this._plateService.addPlate(this.plateForm.value).subscribe({
         next: (val: any) => {
           this._dialogref.close();
-          alert('');
+          alert('تمت الإضافة بنجاح يا خال..');
+          this._platesComponent.getPlatesList();
         },
         error: (err: any) => {
           console.error(err);

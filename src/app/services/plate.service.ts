@@ -48,10 +48,16 @@ export class PlateService {
     const year = parseInt(params.selectedYear.toString());
     const num = parseInt(params.selectedNumber.toString());
 
-    return this._http.post<any>(`https://localhost:7137/ExecutedPlates/GetAll?carTypeId=${carTypeId}&executionYear=${year}&executionNumber=${num}`,null);  
-    
+    return this._http.post<any>(`https://localhost:7137/ExecutedPlates/GetAll?carTypeId=${carTypeId}&executionYear=${year}&executionNumber=${num}`,null);
   }
 
+  deletePlate(id: number): Observable<any> {
+    return this._http.delete(`https://localhost:7137/CarPlates?id=${id}`);  
+  }
+
+  deleteExecutedPlate(id: number): Observable<any>{
+    return this._http.delete(`https://localhost:7137/ExecutedPlates?id=${id}`);
+  } 
 }
 
 

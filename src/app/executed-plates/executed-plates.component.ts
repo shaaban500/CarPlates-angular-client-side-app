@@ -119,6 +119,14 @@ export class ExecutedPlatesComponent implements OnInit {
 
   }
 
+  deleteExecutedPlate(id: number){
+    this._plateService.deleteExecutedPlate(id).subscribe({
+      next: (res) =>{
+        alert("تم الحذف بنجاح يا معلم..");
+        this.getExecutedPlatesList();
+      }
+    });
+  }
 
   printDivContent(): void {
     var printContent = document.getElementById("printContent");
