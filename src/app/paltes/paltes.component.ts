@@ -1,11 +1,12 @@
-import { MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { PlateAddEditComponent } from '../plate-add-edit/plate-add-edit.component';
 import { PlateService } from '../services/plate.service';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-import {Component, OnInit, ViewChild } from '@angular/core';
+import {Component, OnInit, ViewChild, inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { PrintingServiceService } from '../services/printing-service.service';
 
 @Component({
   selector: 'app-paltes',
@@ -42,7 +43,8 @@ export class PaltesComponent implements OnInit {
   constructor(
     private _dialog: MatDialog,
     private _plateService: PlateService,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private _printingService: PrintingServiceService,
     ){
       this.searchForm = this._formBuilder.group({
         carTypeId: '',
@@ -64,9 +66,23 @@ export class PaltesComponent implements OnInit {
   }
 
 
-  openAddEditPlateForm(){
-    this._dialog.open(PlateAddEditComponent);
+  openAddEditPlateForm(data:any){
+    if(data){
+      const dialogRef = this._dialog.open(PlateAddEditComponent, {
+        data: data
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        this.getPlatesList();
+      });
+    }
+    else{
+      const dialogRef = this._dialog.open(PlateAddEditComponent);
+      dialogRef.afterClosed().subscribe(result => {
+        this.getPlatesList();
+      });
+    }
   }
+
 
   getPlatesList() {
     this._plateService.getPlatesList().subscribe({
@@ -125,6 +141,10 @@ export class PaltesComponent implements OnInit {
         this.getPlatesList();
       }
     });
+  }
+
+  print(idDivToBePrint: string): void{
+    this._printingService.printDivContent(idDivToBePrint);
   }
 
 }

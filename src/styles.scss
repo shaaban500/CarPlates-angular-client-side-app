@@ -60,6 +60,9 @@ body {
     
 }
 
+  
+  
+  
 header {
     font-weight: 700;
     font-size: 2.2rem;
@@ -430,6 +433,10 @@ a {
     height: 40px;
 }
 
+.height250px {
+    height: 250px;
+}
+
 .height40 {
     height: 40%;
 }
@@ -661,6 +668,10 @@ a {
 
 .padding10-50 {
     padding: 10px 50px;
+}
+
+.padding10-10 {
+    padding: 10px 10px;
 }
 
 .padding10-30 {
@@ -1069,7 +1080,9 @@ input[type="color"] {
     display:none;
 }
 
-
+.radius5{
+    border-radius: 5px;
+}
 @media only screen and (min-width: 600px) and (max-width: 1024px) {
     .flex-row:not(.need-media-row),
     nav .container:not(.need-media-row) {
@@ -1095,7 +1108,7 @@ input[type="color"] {
     }
 
     .gap2:not(.need-media-row) {
-        gap: 0rem;
+        gap: 1rem;
     }
 
     .gap5, .gap7{
@@ -1158,6 +1171,10 @@ input[type="color"] {
 
     .width250px {
         width: 200px;
+    }
+    
+    .height250px{
+        height: 200px;
     }
 
     .width200px {

@@ -6,6 +6,7 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -44,8 +45,10 @@ export class AppComponent implements OnInit {
   constructor(
     private _dialog: MatDialog,
     private _plateService: PlateService,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private _router: Router,
     ){
+      
       this.searchForm = this._formBuilder.group({
         carTypeId: '',
         carStateId: '',
@@ -118,6 +121,12 @@ export class AppComponent implements OnInit {
       });
     }
 
+  }
+
+  
+
+  isEnteringPage(): boolean {
+    return this._router.url === '/entry-page';
   }
   
 }

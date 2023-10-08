@@ -4,6 +4,8 @@ import { PlateService } from '../services/plate.service';
 import { DialogRef } from '@angular/cdk/dialog';
 import { OnInit } from '@angular/core';
 import { PaltesComponent } from '../paltes/paltes.component';
+import { Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-plate-add-edit',
@@ -20,7 +22,8 @@ export class PlateAddEditComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private _plateService: PlateService,
     private _dialogref: DialogRef<PlateAddEditComponent>,
-    private _platesComponent: PaltesComponent
+    private _platesComponent: PaltesComponent,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     ) {
 
       this.plateForm = this._formBuilder.group({
@@ -46,6 +49,8 @@ export class PlateAddEditComponent implements OnInit {
       this._plateService.getCarStates().subscribe((data) => {
         this.carStates = data;
       });
+
+      this.plateForm.patchValue(this.data);
     }
 
 
@@ -53,6 +58,7 @@ export class PlateAddEditComponent implements OnInit {
 
   onFormSubmit() {
     if (this.plateForm.valid) {
+      console.log(this.plateForm.value);
       this._plateService.addPlate(this.plateForm.value).subscribe({
         next: (val: any) => {
           this._dialogref.close();

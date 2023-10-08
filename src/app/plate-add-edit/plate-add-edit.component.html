@@ -1,67 +1,69 @@
-<div mat-dialog-title class="center padding-top-20">
-    <h2> بيانات اللوحة المعدنية </h2>
-</div>
+<div class="flex-column gap2 padding30 card-radius bg-white shadow1">
+    <div class="center ">
+        <h2> بيانات اللوحة المعدنية </h2>
+    </div>
 
-<form [formGroup]="plateForm" (ngSubmit)="onFormSubmit()">
-    <input hidden formControlName="id">
-    <div mat-dialog-content class="content">
-        <div class="row">
-            <mat-form-field appearance="outline">
-                <mat-label> نوع المركبة </mat-label>
-                <mat-select formControlName="carTypeId">
-                    <mat-option *ngFor="let val of carTypes" [value]="val.id"> {{val.type}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-                <mat-label> حالة المركبة </mat-label>
-                <mat-select formControlName="carStateId">
-                    <mat-option *ngFor="let val of carStates" [value]="val.id"> {{val.state}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
+    <form [formGroup]="plateForm" (ngSubmit)="onFormSubmit()">
+        <input hidden formControlName="id">
+        <div class="flex-column align-center">
+            <div class="center gap2 width100">
+                <mat-form-field appearance="outline">
+                    <mat-label> نوع المركبة </mat-label>
+                    <mat-select formControlName="carTypeId">
+                        <mat-option *ngFor="let val of carTypes" [value]="val.id"> {{val.type}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label> حالة المركبة </mat-label>
+                    <mat-select formControlName="carStateId">
+                        <mat-option *ngFor="let val of carStates" [value]="val.id"> {{val.state}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="center gap2 width100">
+                <mat-form-field appearance="outline">
+                    <mat-label> الأرقام </mat-label>
+                    <input matInput formControlName="numbers">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label> الحروف </mat-label>
+                    <input matInput type="text" formControlName="letters">
+                </mat-form-field>
+            </div>
+            <div class="center gap2 width100">
+                <mat-form-field appearance="outline" class="width100">
+                    <mat-label> التاريخ </mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="date">
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="center gap2 width100">
+                <mat-form-field appearance="outline">
+                    <mat-label> اسم المالك </mat-label>
+                    <input matInput type="text" formControlName="ownerName">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label> عنوان المالك </mat-label>
+                    <input matInput type="text" formControlName="ownerAdress">
+                </mat-form-field>
+            </div>
+            <div class="center gap2 width100">
+                <mat-form-field appearance="outline">
+                    <mat-label> رقم الهاتف </mat-label>
+                    <input matInput type="text" formControlName="ownerPhone">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label> الرقم القومي </mat-label>
+                    <input matInput type="text" formControlName="ownerNationalId">
+                </mat-form-field>
+            </div>
         </div>
-        <div class="row">
-            <mat-form-field appearance="outline">
-                <mat-label> الأرقام </mat-label>
-                <input matInput formControlName="numbers">
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-                <mat-label> الحروف </mat-label>
-                <input matInput type="text" formControlName="letters">
-            </mat-form-field>
+        <div class="center gap2 width100">
+            <button type="submit" class="center padding10-10 radius5 width100 bg-primary white font15px bold700"> حفظ </button>
+            <button class="center width100 padding10-10 radius5 bg-gray white font15px bold700"> إلغاء </button>
         </div>
-        <div class="row">
-            <mat-form-field appearance="outline">
-                <mat-label> التاريخ </mat-label>
-                <input matInput [matDatepicker]="picker" formControlName="date">
-                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-        </div>
-        <div class="row">
-            <mat-form-field appearance="outline">
-                <mat-label> اسم المالك </mat-label>
-                <input matInput type="text" formControlName="ownerName">
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-                <mat-label> عنوان المالك </mat-label>
-                <input matInput type="text" formControlName="ownerAdress">
-            </mat-form-field>
-        </div>
-        <div class="row">
-            <mat-form-field appearance="outline">
-                <mat-label> رقم الهاتف </mat-label>
-                <input matInput type="text" formControlName="ownerPhone">
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-                <mat-label> الرقم القومي </mat-label>
-                <input matInput type="text" formControlName="ownerNationalId">
-            </mat-form-field>
-        </div>
-    </div>
-    <div mat-dialog-actions class="actions">
-        <button mat-raised-button color="primary" type="submit"> حفظ </button>
-        <button mat-raised-button> إالغاء </button>
-    </div>
-</form>
+    </form>
+</div>

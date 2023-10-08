@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./entry-page.component.scss']
 })
 export class EntryPageComponent {
-
+  backgroundImage = 'url(\'../../assets/bg_logo.jpg\')';
+  logoImage = 'url(\'../../assets/logo.png\')';
 }

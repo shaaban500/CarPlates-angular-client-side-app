@@ -1,27 +1,30 @@
-<div class="flex-column align-center gap3"> 
-    <span class="center font20px gold bold">  </span>
-    <span class="center font20px gold bold"> كشف عهدة مخزن اللوحات المعدنية المؤمنة </span>
-    <table class="width50 mg-top20">
-      <thead>
-        <tr>
-          <th> النوع </th>
-          <th *ngFor="let state of dailyReport.carStates">{{ state.state }}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let type of dailyReport.carTypes; let i = index">
-          <th>{{ type.type }}</th>
-          <td *ngFor="let report of dailyReport.dailyReport.slice(i * dailyReport.carStates.length, (i + 1) * dailyReport.carStates.length)">{{ report }}</td>
-        </tr>
-        <th> الإجمالي </th>
-        <td *ngFor="let count of dailyReport.stateCountList; let i = index">
-          {{ count }}
-        </td>
-      </tbody>
-    </table>
-
-    <button (click)="printTable()" class="center gap2 width20 bg-primary white padding1 card-radius font20px bold700">
+<div class="flex-column align-center gap3 width100"> 
+  <div id="dialyReport" class="flex-column align-center gap3 width100"> 
+      <span class="center font20px gold bold">  </span>
+      <span class="center font20px gold bold"> كشف عهدة مخزن اللوحات المعدنية المؤمنة </span>
+      <table class="width50 mg-top20">
+        <thead>
+          <tr>
+            <th> النوع </th>
+            <th *ngFor="let state of dailyReport.carStates">{{ state.state }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let type of dailyReport.carTypes; let i = index">
+            <th>{{ type.type }}</th>
+            <td *ngFor="let report of dailyReport.dailyReport.slice(i * dailyReport.carStates.length, (i + 1) * dailyReport.carStates.length)">{{ report }}</td>
+          </tr>
+          <th> الإجمالي </th>
+          <td *ngFor="let count of dailyReport.stateCountList; let i = index">
+            {{ count }}
+          </td>
+        </tbody>
+      </table>
+  </div>
+  <div class="center width100">
+    <button (click)="print('dialyReport')" class="center gap2 width20 bg-primary white padding1 card-radius font20px bold700">
       <span class="material-symbols-rounded"> print </span>
       <span> طباعة اليومية </span>
     </button>
-</div>
+  </div>  
+</div>  

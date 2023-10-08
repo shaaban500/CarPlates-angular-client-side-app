@@ -6,6 +6,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ExecutedPlatesAddEditComponent } from '../executed-plates-add-edit/executed-plates-add-edit.component';
+import { PrintingServiceService } from '../services/printing-service.service';
 
 @Component({
   selector: 'app-executed-plates',
@@ -36,7 +37,8 @@ export class ExecutedPlatesComponent implements OnInit {
   constructor(
     private _dialog: MatDialog,
     private _plateService: PlateService,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private _printingService: PrintingServiceService
     ){
       this.searchForm = this._formBuilder.group({
         carTypeId: '',
@@ -128,124 +130,7 @@ export class ExecutedPlatesComponent implements OnInit {
     });
   }
 
-  printDivContent(): void {
-    var printContent = document.getElementById("printContent");
-    
-    if (!printContent) {
-      console.error("Element with id 'printContent' not found.");
-      return;
-    }
-    
-    var printWindow = window.open("", "_blank");
-    printWindow?.document.write("<html dir='rtl'><head>");
-    
-    
-    printWindow?.document.write('<style>');
-    printWindow?.document.write(` 
-    table {
-      border-collapse: collapse; 
-      overflow: hidden; 
-      border-spacing: 0;
-      width: 100%;
-      box-shadow: var(--shadow-1);
-      dir: ltr;
+  print(idDivToBePrint: string): void{
+    this._printingService.printDivContent(idDivToBePrint);
   }
-  
-  th, td {
-      text-align: center;
-      padding: 10px 10px;
-      min-height: 50px;
-      font-size: 1.5rem;
-      background-color: var(--color-white);
-      border: 1px solid gray;
-  }
-  
-  thead, th {
-      min-height: 50px;
-      font-size: 1.5rem;
-      font-weight: normal;
-      color: var(--color-primary);
-      background-color: var(--color-light);
-  }
-  
-  
-  td .div, .td span {
-      font-size: 1.5rem;
-  }
-
-  .no-print{
-    display: none !important;
-  }
-    `);
-    printWindow?.document.write('</style>');
-    
-    printWindow?.document.write("</head><body><main>");
-    printWindow?.document.write(printContent?.innerHTML);
-    printWindow?.document.write("</main></body></html>");
-    
-    printWindow?.document.close();
-    printWindow?.print();
-  }
-
-
-  async printLargeDataConcurrently(): Promise<void> {
-    // Define the chunk size based on your needs
-    const chunkSize = 100; // You can adjust this value
-  
-    try {
-      const data = await this._plateService.getExecutedPlatesList().toPromise();
-      if (!data || data.length === 0) {
-        console.error("No data to print.");
-        return;
-      }
-  
-      for (let i = 0; i < data.length; i += chunkSize) {
-        const chunk = data.slice(i, i + chunkSize);
-  
-        await new Promise<void>((resolve) => {
-          setTimeout(() => {
-            const printWindow = window.open("", "_blank");
-  
-            if (!printWindow) {
-              console.error("Unable to open a new window for printing.");
-              resolve();
-              return;
-            }
-  
-            const printDocument = printWindow.document;
-  
-            if (!printDocument) {
-              console.error("Unable to access the print document.");
-              resolve();
-              return;
-            }
-  
-            printDocument.write("<html><head><title>Print</title></head><body>");
-            printDocument.write("<main>");
-  
-            // Process and print the chunk of data here
-            chunk.forEach((item: string) => {
-              printDocument.write(`<div>${item}</div>`);
-            });
-  
-            printDocument.write("</main></body></html>");
-  
-            printDocument.close();
-  
-            printWindow.addEventListener("afterprint", () => {
-              printWindow.close();
-              resolve();
-            });
-  
-            printWindow.print();
-          }, 100); // Adjust the delay (in milliseconds) between chunks
-        });
-      }
-  
-      console.log("Printing completed successfully.");
-    } catch (error) {
-      console.error("Error while printing:", error);
-    }
-  }
-
 }

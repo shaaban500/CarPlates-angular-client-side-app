@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DailyReportService } from '../services/daily-report.service';
 import { OnInit } from '@angular/core';
+import { PrintingServiceService } from '../services/printing-service.service';
 
 @Component({
   selector: 'app-daily-report',
@@ -12,7 +13,9 @@ export class DailyReportComponent implements OnInit{
   dailyReport: any;
 
   constructor(
-    private _dailyReportService: DailyReportService) {
+    private _dailyReportService: DailyReportService,
+    private _printingService: PrintingServiceService
+    ) {
   }
 
   ngOnInit(): void {
@@ -21,8 +24,8 @@ export class DailyReportComponent implements OnInit{
     });
   }
 
-  printTable() {
-      window.print();
+  print(idDivToBePrint: string): void{
+    this._printingService.printDivContent(idDivToBePrint);
   }
 
 }
