@@ -71,5 +71,11 @@ export class PlateAddEditComponent implements OnInit {
       });
     }
   }
+
+
+  onCloseClick() {
+    this._dialogref.close();
+  }
+
 }
  

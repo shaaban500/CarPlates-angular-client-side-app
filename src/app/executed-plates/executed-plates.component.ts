@@ -73,8 +73,21 @@ export class ExecutedPlatesComponent implements OnInit {
     }
   }
   
-  openAddEditExecutedPlateForm(){
-    this._dialog.open(ExecutedPlatesAddEditComponent);
+  openAddEditExecutedPlateForm(data: any){
+    if(data){
+      const dialogRef = this._dialog.open(ExecutedPlatesAddEditComponent, {
+        data: data
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        this.getExecutedPlatesList();
+      });
+    }
+    else{
+      const dialogRef = this._dialog.open(ExecutedPlatesAddEditComponent);
+      dialogRef.afterClosed().subscribe(result => {
+        this.getExecutedPlatesList();
+      });
+    }
   }
 
   getExecutedPlatesList() {

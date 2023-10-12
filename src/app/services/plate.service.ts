@@ -9,7 +9,6 @@ import { Observable } from 'rxjs';
 
 
 export class PlateService {
-
   constructor(private _http: HttpClient) { }
 
   addPlate(data : any): Observable<any> {

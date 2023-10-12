@@ -1,0 +1,12 @@
+export class CarPlate {
+
+    Letters: string;
+    Numbers: string;
+    OwnerName: string;
+    OwnerAdress: string;
+    OwnerPhone: string;
+    OwnerNationalId: string;
+    Date: Date;
+    CarTypeId: Number;
+    CarStateId: Number;
+}

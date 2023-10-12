@@ -55,4 +55,8 @@ export class ExecutedPlatesAddEditComponent implements OnInit {
       });
     }
   }
+
+  onCloseClick(){
+    this._dialogref.close();
+  }
 }
