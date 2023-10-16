@@ -125,8 +125,4 @@ export class AppComponent implements OnInit {
 
   
 
-  isEnteringPage(): boolean {
-    return this._router.url === '/entry-page';
-  }
-  
 }

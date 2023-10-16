@@ -1,49 +1,63 @@
 <link rel="stylesheet" type="text/css" href="https://www.fontstatic.com/f=Noto-Urdu,amiri-quran" />
-<div class="entry-page center height100">
-    <div class="background" [style.backgroundImage]="backgroundImage">
+
+<div class="background-video">
+    <video autoplay loop muted id="video-background">
+        <source src="../../assets/Comp.mp4" type="video/mp4">
+    </video>
+    <div class="overlay"></div> 
+</div>
+
+
+<div class="content flex-column justify-content-end height90 width100 z-index100">
+    <div class="flex-row justify-around align-center width100 ">
+        <div class="flex-column align-center gap3 bg-gray-trans">
+            <span class="special-font2"> تصميم و تطوير: </span>
+            <div>
+                <span class="special-font2"> مهندس/ </span>
+                <span class="special-font"> محمد شعبان البي</span>
+            </div>
+            <a href="https://www.linkedin.com/in/mohamed-shaaban-4b8019178/" class="center gap2">
+                <span class="special-font2">
+                    مهندس برمجيات 
+                </span>
+                <span class="material-symbols-rounded yellowgreen mg-top15">
+                    phone_in_talk
+                </span>
+            </a>
+        </div>
+        <div class="flex-column align-center gap3 bg-gray-trans">
+            <span class="special-font2"> تم بإشراف: </span>
+            <div>
+                <span class="special-font2"> رائد/ </span>
+                <span class="special-font">  خالد كرم المحلاوي</span>
+            </div>
+            <span class="special-font2"> رئيس قسم التراخيص </span>
+        </div>
     </div>
-    <div class="content">
-        <div class="flex-column align-center height100 gap5 font20px bold700 padding30">
-            <img src="assets/logo.png" class="width250px height250px animation-spin">
-            <div class="center gap2 width100 padding30">
-                <div class="hover flex-column align-center white bg-primary padding30 radius5 width250px">
-                    <a routerLink="/daily-report" class="center gap1"> 
-                        <span class="material-symbols-rounded"> calendar_month </span>
-                        <span class="font20px"> اليومية </span>
-                    </a>
-                </div>
-                <div class="hover flex-column align-center white bg-primary padding30 radius5 width250px">
-                    <a routerLink="/plates" class="center gap1">
-                        <span class="material-symbols-rounded"> pin </span>
-                        <span class="font20px"> اللوحات المعدنية </span>
-                    </a>
-                </div>
-                <div class="hover flex-column align-center white bg-primary padding30 radius5 width250px">
-                    <a routerLink="/executed-plates" class="center gap1">
-                        <span class="material-symbols-rounded"> delete_forever </span>
+</div>
+
+<!--<div class="flex-column justify-content-around width100  z-index100">
+    <div class="flex-column align-center gap5 font20px bold700 padding30">
+        <div class="center gap2 width100 padding30">
+            <div class="hover flex-column align-center white bg-primary padding30 radius5 width250px">
+                <a routerLink="/daily-report" class="center gap1"> 
+                    <span class="material-symbols-rounded"> calendar_month </span>
+                    <span class="font20px"> اليومية </span>
+                </a>
+            </div> 
+            <div class="hover flex-column align-center white bg-primary padding30 radius5 width250px">
+                <a routerLink="/plates" class="center gap1">
+                    <span class="material-symbols-rounded"> pin </span>
+                    <span class="font20px"> اللوحات المعدنية </span>
+                </a>
+            </div>
+            <div class="hover flex-column align-center white bg-primary padding30 radius5 width250px">
+                <a routerLink="/executed-plates" class="center gap1">
+                    <span class="material-symbols-rounded"> delete_forever </span>
                         <span class="font20px"> لجان الإعدام </span>   
                     </a>
                 </div>
             </div>
-            <div class="flex-column align-center gap7">
-                <div class="flex-column align-center gap3">
-                    <span class="special-font2"> تصميم و تطوير: </span>
-                    <div>
-                        <span class="special-font2"> مهندس/ </span>
-                        <span class="special-font"> محمد شعبان البي</span>
-                    </div>
-                    <span class="special-font2"> "عبد سابقا" </span>
-                </div>
-                <div class="flex-column align-center gap3">
-                    <span class="special-font2"> تم بإشراف: </span>
-                    <div>
-                        <span class="special-font2"> رائد/ </span>
-                        <span class="special-font">  خالد كرم المحلاوي</span>
-                    </div>
-                    <span class="special-font2"> رئيس قسم التراخيص </span>
-                </div>
-            </div>
         </div>
 
-    </div>
-</div>
+    </div>-->
