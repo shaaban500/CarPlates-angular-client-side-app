@@ -28,14 +28,7 @@ export class PlateService {
   }
   
   getPlatesList(params?: any): Observable<any> {
-    if (!params) {
-      return this._http.post<any>('https://localhost:7137/CarPlates/GetAll?carStateId=1&carTypeId=1', null);
-    }
-
-    const carStateId = parseInt(params.carStateId.toString());
-    const carTypeId = parseInt(params.carTypeId.toString());
-
-    return this._http.post<any>('https://localhost:7137/CarPlates/GetAll?carStateId=' + carStateId + '&carTypeId=' + carTypeId, null);
+      return this._http.post<any>('https://localhost:7137/CarPlates/GetAll', params);
   }
 
   getExecutedPlatesList(params?: any): Observable<any> {

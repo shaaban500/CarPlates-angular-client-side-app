@@ -13,7 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PlateService } from './services/plate.service';
 import { MatTableModule } from '@angular/material/table';
@@ -58,6 +58,7 @@ import { EntryPageComponent } from './entry-page/entry-page.component';
     MatPaginatorModule,
     MatSortModule,
     MatFormFieldModule,
+    FormsModule
   ],
   providers: [
     PlateService,

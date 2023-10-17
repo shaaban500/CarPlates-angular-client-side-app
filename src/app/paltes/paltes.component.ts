@@ -1,12 +1,11 @@
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { PlateAddEditComponent } from '../plate-add-edit/plate-add-edit.component';
 import { PlateService } from '../services/plate.service';
-import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
 import {Component, OnInit, ViewChild, inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PrintingServiceService } from '../services/printing-service.service';
+import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-paltes',
@@ -14,6 +13,105 @@ import { PrintingServiceService } from '../services/printing-service.service';
   styleUrls: ['./paltes.component.scss']
 })
 export class PaltesComponent implements OnInit {
+  
+  plates: any[] = [];
+  carTypes: any[] = [];
+  carStates: any[] = [];
+
+  filterObj = {
+    pageIndex: 1,
+    pageSize: 10,
+    carTypeId: null,
+    carStateId: null,
+    letters: null,
+    numbers: null,
+    ownerName: null,
+    ownerPhone: null,
+    ownerNationalId: null,
+    executionYear: null,
+    executionNumber: null,
+    date: null,
+  };
+  
+
+  constructor(
+    private _dialog: MatDialog,
+    private _plateService: PlateService,
+    private _printingService: PrintingServiceService,
+    ){};
+
+  ngOnInit(): void {
+  
+    this.getPlates();
+    
+    this._plateService.getCarTypes().subscribe((data) => {
+      this.carTypes = data;
+    });
+    
+    this._plateService.getCarStates().subscribe((data) => {
+      this.carStates = data;
+    });
+  }
+  
+  getPlates() {
+    this._plateService.getPlatesList(this.filterObj).subscribe({
+      next: (res) => {
+        this.plates = res; 
+      },
+      error: console.log,
+    });
+  }
+  
+  onPrevious(){
+    this.filterObj.pageIndex --;
+
+    if(this.filterObj.pageIndex < 1){
+      this.filterObj.pageIndex = 1;
+    }
+
+    this.getPlates();
+  }
+  
+  onNext(){
+    this.filterObj.pageIndex ++;
+    this.getPlates();
+  }
+  
+  openAddEditPlateForm(data:any){
+    if(data){
+      const dialogRef = this._dialog.open(PlateAddEditComponent, {
+        data: data
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        this.getPlates();
+      });
+    }
+    else{
+      const dialogRef = this._dialog.open(PlateAddEditComponent);
+      dialogRef.afterClosed().subscribe(result => {
+        this.getPlates();
+      });
+    }
+  }
+  
+
+  deletePlate(id: number){
+    this._plateService.deletePlate(id).subscribe({
+      next: (res) =>{
+        alert("تم الحذف بنجاح يا معلم..");
+        this.getPlates();
+      }
+    });
+  }
+
+  print(idDivToBePrint: string): void{
+    this._printingService.printDivContent(idDivToBePrint);
+  }
+
+
+}
+
+/*export class PaltesComponent implements OnInit {
   searchForm: FormGroup;
   
   carTypes: any[] = [];
@@ -66,22 +164,6 @@ export class PaltesComponent implements OnInit {
   }
 
 
-  openAddEditPlateForm(data:any){
-    if(data){
-      const dialogRef = this._dialog.open(PlateAddEditComponent, {
-        data: data
-      });
-      dialogRef.afterClosed().subscribe(result => {
-        this.getPlatesList();
-      });
-    }
-    else{
-      const dialogRef = this._dialog.open(PlateAddEditComponent);
-      dialogRef.afterClosed().subscribe(result => {
-        this.getPlatesList();
-      });
-    }
-  }
 
 
   getPlatesList() {
@@ -134,17 +216,7 @@ export class PaltesComponent implements OnInit {
 
   }
 
-  deletePlate(id: number){
-    this._plateService.deletePlate(id).subscribe({
-      next: (res) =>{
-        alert("تم الحذف بنجاح يا معلم..");
-        this.getPlatesList();
-      }
-    });
-  }
-
-  print(idDivToBePrint: string): void{
-    this._printingService.printDivContent(idDivToBePrint);
-  }
+  
 
 }
+*/

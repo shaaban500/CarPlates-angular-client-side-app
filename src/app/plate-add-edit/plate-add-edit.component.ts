@@ -63,7 +63,7 @@ export class PlateAddEditComponent implements OnInit {
         next: (val: any) => {
           this._dialogref.close();
           alert('تمت الإضافة بنجاح يا خال..');
-          this._platesComponent.getPlatesList();
+          this._platesComponent.getPlates();
         },
         error: (err: any) => {
           console.error(err);

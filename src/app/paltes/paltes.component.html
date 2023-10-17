@@ -1,110 +1,125 @@
 
 <div class="flex-column align-center gap3 mg-top20">
   <div class="flex-column align-center gap3 width90">
-    <div class="center gap3">
-      <mat-form-field appearance="outline">
-        <mat-label>البحث </mat-label>
-        <input matInput (keyup)="applyFilter($event)" #input>
-      </mat-form-field>
-        
-      <form [formGroup]="searchForm" (ngSubmit)="onSearchFormSubmit()" class="center gap3">
-        <mat-form-field appearance="outline">
-          <mat-label> نوع المركبة </mat-label>
-          <mat-select formControlName="carTypeId">
-            <mat-option *ngFor="let val of carTypes" [value]="val.id"> {{val.type}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label> حالة المركبة </mat-label>
-          <mat-select formControlName="carStateId">
-            <mat-option *ngFor="let val of carStates" [value]="val.id"> {{val.state}}
-              </mat-option>
-            </mat-select>
-        </mat-form-field>
-          
-          <button type="submit" class="center bg-primary padding1 white radius50">
-            <span class="material-symbols-rounded">search</span>
-          </button>    
-      </form>
-    </div>
-  
-    <div class="flex-row width100 align-center font20px">
-      <span class="flex-row justify-content-end width100 font20px bold700 primary padding1"> {{ carTypeValue }}  -  {{ carStateValue }} </span>
+    
+    <div class="flex-row width100 align-center justify-content-between font20px bg-white card-radius card-padding">
+      <div class="flex-row align-center gap5 width100">
+        <div class="center gap1">
+          <span class="material-symbols-rounded center cursor" (click)="onNext()">
+            arrow_forward_ios
+          </span>
+          <span class="center">
+            {{filterObj.pageIndex}}            
+          </span>
+          <span class="material-symbols-rounded center cursor" (click)="onPrevious()">
+            arrow_back_ios
+          </span>  
+        </div>
+        <div class="width100">
+            <label class="font10px"> عدد العناصر بالصفحة </label>
+            <select [(ngModel)]="filterObj.pageSize" (change)="getPlates()" class="input-box width100px">
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+              <option value="500">500</option>
+              <option value="1000">1000</option>
+            </select>
+        </div>
+      </div>
+      <!--<span class="flex-row justify-content-end width100 font20px bold700 primary padding1"> {{ carTypeValue }}  -  {{ carStateValue }} </span>-->
       <div class="flex-row justify-content-end width100">
-        <button (click)="openAddEditPlateForm(null)" class="center gap1 width30 bg-primary white padding1 card-radius font20px bold700">
+        <button (click)="openAddEditPlateForm(null)" class="center gap1 bg-primary white padding1 card-radius font20px bold700">
           <span class="material-symbols-rounded"> add_box </span>
           <span> إضافة لوحة </span>
         </button>
       </div>
     </div>
+
+    <div class="center gap3 width100 bg-white card-padding card-radius">
       
-    <div id="platesTable" class="width100">
-      <table mat-table [dataSource]="dataSource" matSort>
         
-        <ng-container matColumnDef="id" class="no-print">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header class="no-print"> ID </th>
-          <td mat-cell *matCellDef="let row" class="no-print"> {{row.id}} </td>
-        </ng-container>
+      <div class="width100">
+        <label> نوع المركبة </label>
+        <select formControlName="carTypeId" class="input-box width100">
+          <option *ngFor="let val of carTypes" [value]="val.id"> {{val.type}} </option>
+        </select>
+      </div>
+      
+      <div class="width100">
+        <label> حالة المركبة </label>
+        <select [(ngModel)]="filterObj.carStateId" class="input-box width100">
+          <option *ngFor="let val of carStates" [value]="val.id"> {{val.state}} </option>
+        </select>
+      </div>
 
-        <ng-container matColumnDef="letters">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> الحروف </th>
-          <td mat-cell *matCellDef="let row"> {{row.letters}} </td>
-        </ng-container>
+      <div class="width100">
+        <label> الحروف </label>
+        <input [(ngModel)]="filterObj.letters" class="input-box width100">
+      </div>
+      
+      <div class="width100">
+        <label> الأرقام </label>
+        <input [(ngModel)]="filterObj.numbers" class="input-box width100">
+      </div>
 
-        <ng-container matColumnDef="numbers">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> الأرقام </th>
-          <td mat-cell *matCellDef="let row"> {{row.numbers}} </td>
-        </ng-container>
+      <div class="width100">
+        <label> اسم المالك </label>
+        <input [(ngModel)]="filterObj.ownerName" class="input-box width100">
+      </div>
 
-        <ng-container matColumnDef="date">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> التاريخ </th>
-          <td mat-cell *matCellDef="let row"> {{row.date | date}} </td>
-        </ng-container>
+      <div class="width100">
+        <label> الرقم القومي </label>
+        <input [(ngModel)]="filterObj.ownerNationalId" class="input-box width100">
+      </div>
 
-        <ng-container matColumnDef="ownerName">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> اسم المالك </th>
-          <td mat-cell *matCellDef="let row"> {{row.ownerName}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="ownerNationalId">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> الرقم القومي </th>
-          <td mat-cell *matCellDef="let row"> {{row.ownerNationalId}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="ownerPhone">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> رقم الهاتف </th>
-          <td mat-cell *matCellDef="let row"> {{row.ownerPhone}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="ownerAdress">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> العنوان </th>
-          <td mat-cell *matCellDef="let row"> {{row.ownerAdress}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="action" class="no-print">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header class="no-print"> تعديل </th>
-          <td mat-cell *matCellDef="let row" class="no-print">
-            <button mat-icon-button color="primary" (click)="openAddEditPlateForm(row)">
-              <span class="material-symbols-rounded">edit</span>
-            </button>
-            <button mat-icon-button color="warn" (click)="deletePlate(row.id)">
-              <span class="material-symbols-rounded">delete</span>
-            </button>
-          </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-        <tr class="mat-row" *matNoDataRow>
-          <td class="mat-cell" colspan="4">لا يوجد بيانات مطابقة للبحث عن:  "{{input.value}}"</td>
-        </tr>
-      </table>
+        <button type="submit" (click)="getPlates()" class="center bg-white cursor mg-top20">
+          <span class="material-symbols-rounded primary">search</span>
+        </button>    
     </div>
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100, 500, 1000]" aria-label="Select page of users" class="width100"></mat-paginator>
+  
+    <div id="platesTable" class="width100">
+      <table>
+        <thead>
+          <tr>
+            <th class="no-print hide">ID</th>
+            <th>الحروف</th>
+            <th>الأرقام</th>
+            <th>التاريخ</th>
+            <th>اسم المالك</th>
+            <th>الرقم القومي</th>
+            <th>رقم الهاتف</th>
+            <th>العنوان</th>
+            <th class="no-print">تعديل</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of plates">
+            <td class="no-print hide">{{ row.id }}</td>
+            <td>{{ row.letters }}</td>
+            <td>{{ row.numbers }}</td>
+            <td>{{ row.date | date }}</td>
+            <td>{{ row.ownerName }}</td>
+            <td>{{ row.ownerNationalId }}</td>
+            <td>{{ row.ownerPhone }}</td>
+            <td>{{ row.ownerAdress }}</td>
+            <td class="no-print center gap1 ">
+              <button class="primary bg-white" (click)="openAddEditPlateForm(row)">
+                <span class="material-symbols-rounded">edit</span>
+              </button>
+              <button class="danger bg-white" (click)="deletePlate(row.id)">
+                <span class="material-symbols-rounded">delete</span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-    <button (click)="print('platesTable')" class="center gap1 width20 bg-primary white padding1 card-radius font20px bold700">
+      
+    </div>
+    
+
+    <button (click)="print('platesTable')" class="center gap1 width10 bg-primary white padding1 card-radius font20px bold700">
       <span class="material-symbols-rounded"> print </span>
       <span> طباعة </span>
     </button>

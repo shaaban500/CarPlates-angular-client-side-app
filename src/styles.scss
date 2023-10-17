@@ -1136,63 +1136,6 @@ input[type="color"] {
         width:100%;
     }
 
-    header {
-        font-size: 1.5rem;
-    }
-
-    thead {
-        font-size: 1rem;
-    }
-
-    td {
-        font-size: 0.5rem;
-    }
-
-    .font20px {
-        font-size: 15px;
-    }
-
-    .material-symbols-rounded {
-        font-size: 20px !important;
-    }
-
-    .card-padding {
-        padding: 3rem 3rem;
-    }    
-
-  
-    .card-radius {
-        border-radius: 10px;
-    }
-
-    .width25{
-        width: 35%;
-    }
-
-    .width30 {
-        width: 30%;
-    }
-
-    .width95 {
-        width: 95%;
-    }
-
-    .width300px{
-        width: 250px;
-    }
-
-    .width250px {
-        width: 200px;
-    }
-    
-    .height250px{
-        height: 200px;
-    }
-
-    .width200px {
-        width: 150px;
-    }
-
 }
 
 
@@ -1223,9 +1166,6 @@ input[type="color"] {
         gap: 0rem;
     }
 
-    .gap5, .gap7 {
-        gap: 10px;
-    }
 
     main {
         width: 95%;
@@ -1234,61 +1174,6 @@ input[type="color"] {
 
     table {
         width: 100%;
-    }
-
-    header {
-        font-size: 12px;
-    }
-
-    thead {
-        font-size: 10px;
-    }
-
-    td {
-        font-size: 1px;
-    }
-
-  
-
-    .font20px {
-        font-size: 8px;
-    }
-
-    .material-symbols-rounded {
-        font-size: 10px !important;
-    }
-
-    .card-padding {
-        padding: 3rem 3rem;
-    }
-
-
-    .card-radius {
-        border-radius: 10px;
-    }
-
-    .width25 {
-        width: 35%;
-    }
-
-    .width30 {
-        width: 70%;
-    }
-
-    .width300px {
-        width: 150px;
-    }
-
-    .width250px {
-        width: 125px;
-    }
-
-    .width200px {
-        width: 100px;
-    }
-
-    nav img.logo {
-        width: 3rem;
     }
 
 }
@@ -1346,4 +1231,8 @@ input[type="color"] {
 
 .padding20-30 {
     padding: 20px 30px;
+}
+
+.not-bold {
+    font-weight: 100;
 }
