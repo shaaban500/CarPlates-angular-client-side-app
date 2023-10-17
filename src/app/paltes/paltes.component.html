@@ -41,7 +41,7 @@
         
       <div class="width100">
         <label> نوع المركبة </label>
-        <select formControlName="carTypeId" class="input-box width100">
+        <select [(ngModel)]="filterObj.carTypeId" class="input-box width100">
           <option *ngFor="let val of carTypes" [value]="val.id"> {{val.type}} </option>
         </select>
       </div>
@@ -82,7 +82,7 @@
       <table>
         <thead>
           <tr>
-            <th class="no-print hide">ID</th>
+            <th class="no-print ">ID</th>
             <th>الحروف</th>
             <th>الأرقام</th>
             <th>التاريخ</th>
@@ -95,7 +95,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let row of plates">
-            <td class="no-print hide">{{ row.id }}</td>
+            <td class="no-print ">{{ row.id }}</td>
             <td>{{ row.letters }}</td>
             <td>{{ row.numbers }}</td>
             <td>{{ row.date | date }}</td>
@@ -119,7 +119,7 @@
     </div>
     
 
-    <button (click)="print('platesTable')" class="center gap1 width10 bg-primary white padding1 card-radius font20px bold700">
+    <button (click)="print('platesTable')" class="center gap1 width10 bg-primary white padding1 card-radius font20px bold700 mg-bottom50">
       <span class="material-symbols-rounded"> print </span>
       <span> طباعة </span>
     </button>

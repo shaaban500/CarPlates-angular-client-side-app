@@ -9,31 +9,33 @@ import { Observable } from 'rxjs';
 
 
 export class PlateService {
+  url : string = "https://localhost:7137/";
+
   constructor(private _http: HttpClient) { }
 
   addPlate(data : any): Observable<any> {
-    return this._http.post('https://localhost:7137/CarPlates', data);
+    return this._http.post(this.url + 'CarPlates', data);
   }
 
   addExecutedPlate(data : any): Observable<any> {
-    return this._http.post('https://localhost:7137/ExecutedPlates', data);
+    return this._http.post(this.url + 'ExecutedPlates', data);
   }
 
   getCarStates(): Observable<any[]> {
-    return this._http.get<any[]>('https://localhost:7137/CarStates/GetAll');
+    return this._http.get<any[]>(this.url + 'CarStates/GetAll');
   }
 
   getCarTypes(): Observable<any[]> {
-    return this._http.get<any[]>('https://localhost:7137/CarTypes/GetAll');
+    return this._http.get<any[]>(this.url + 'CarTypes/GetAll');
   }
   
   getPlatesList(params?: any): Observable<any> {
-      return this._http.post<any>('https://localhost:7137/CarPlates/GetAll', params);
+      return this._http.post<any>(this.url + 'CarPlates/GetAll', params);
   }
 
   getExecutedPlatesList(params?: any): Observable<any> {
     if (!params) {
-      return this._http.post<any>(`https://localhost:7137/ExecutedPlates/GetAll?carTypeId=1&executionYear=1&executionNumber=1`,null);  
+      return this._http.post<any>(this.url + `ExecutedPlates/GetAll?carTypeId=1&executionYear=1&executionNumber=1`,null);  
     }
 
     const carTypeId = parseInt(params.carTypeId.toString());

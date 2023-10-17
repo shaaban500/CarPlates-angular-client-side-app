@@ -21,39 +21,82 @@ export class PrintingServiceService {
     
     printWindow?.document.write('<style>');
     printWindow?.document.write(` 
-          table {
-            border-collapse: collapse; 
-            overflow: hidden; 
-            border-spacing: 0;
-            width: 100%;
-            box-shadow: var(--shadow-1);
-            dir: ltr;
-        }
-        
-        th, td {
-            text-align: center;
-            padding: 10px 10px;
-            min-height: 30px;
-            font-size: 1rem;
-            background-color: var(--color-white);
-            border: 1px solid gray;
-        }
-        
-        thead, th {
-            min-height: 50px;
-            font-size: 1.5rem;
-            font-weight: normal;
-            color: var(--color-primary);
-            background-color: var(--color-light);
-        }
-        
-        
-        td, td .div, .td span {
-            font-size: 1rem;
-        }
+    html{
+      direction: rtl;
+  }
+
+  body {
+      page-break-after: always; 
+  }
+   table {
+      border-collapse: collapse; 
+      overflow: hidden; 
+      border-spacing: 0;
+      width: 100%;
+  }
+  
+  td {
+    min-height: 20px;
+  }
+  
+  th, td {
+      text-align: center;
+      padding: 10px 10px;
+      border: 1px solid gray;
+  }
+  
+  thead, th {
+      font-size: 22px;
+      font-weight: normal;
+      background-color: #D3D3D3;
+      min-height: 30px;
+  }
+  
+  
+  td{
+      font-size: 18px;
+  }
+
+  .flex-column {
+      display: flex;
+      flex-direction: column;
+  }
+
+  .flex-row {
+      display: flex;
+      flex-direction: row;
+  }
+
+
+  .center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+
+  .align-center {
+      align-items: center;
+  }
+
+  
+  .justify-content-between {
+      justify-content: space-between;
+  }
 
         .no-print{
           display: none !important;
+        }
+
+        .font20px{
+          font-size: 22px;
+        }
+
+        .bold{
+          font-weight: bold;
+        }
+
+        .mg-top20{
+          margin-top: 20px;
         }
     `);
     printWindow?.document.write('</style>');
