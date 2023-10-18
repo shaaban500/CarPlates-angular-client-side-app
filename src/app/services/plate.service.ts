@@ -25,6 +25,10 @@ export class PlateService {
     return this._http.get<any[]>(this.url + 'CarStates/GetAll');
   }
 
+  getExecutedCarStates():Observable<any[]> {
+    return this._http.get<any[]>(this.url + 'ExecutedCarStates/GetAll');
+  }
+
   getCarTypes(): Observable<any[]> {
     return this._http.get<any[]>(this.url + 'CarTypes/GetAll');
   }
@@ -34,15 +38,7 @@ export class PlateService {
   }
 
   getExecutedPlatesList(params?: any): Observable<any> {
-    if (!params) {
-      return this._http.post<any>(this.url + `ExecutedPlates/GetAll?carTypeId=1&executionYear=1&executionNumber=1`,null);  
-    }
-
-    const carTypeId = parseInt(params.carTypeId.toString());
-    const year = parseInt(params.selectedYear.toString());
-    const num = parseInt(params.selectedNumber.toString());
-
-    return this._http.post<any>(`https://localhost:7137/ExecutedPlates/GetAll?carTypeId=${carTypeId}&executionYear=${year}&executionNumber=${num}`,null);
+    return this._http.post<any>(this.url + `ExecutedPlates/GetAll`, params);
   }
 
   deletePlate(id: number): Observable<any> {

@@ -14,42 +14,38 @@ import { PrintingServiceService } from '../services/printing-service.service';
   styleUrls: ['./executed-plates.component.scss']
 })
 export class ExecutedPlatesComponent implements OnInit {
-  searchForm: FormGroup;
   
   years: any[] = [];
   numbers: any[] = [];
   carTypes: any[] = [];
+  executedPlates: any[] = [];
+  carStates: any[] = [];
 
-  carTypeValue : string = "";
-
-  displayedColumns: string[] = [
-    'id',
-    'letters',
-    'numbers',
-    'date',
-    'action'
-  ];
-  dataSource!: MatTableDataSource<any>;
-
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-
+  filterObj = {
+    pageIndex: 1,
+    pageSize: 10,
+    carTypeId: null,
+    carStateId: null,
+    letters: null,
+    numbers: null,
+    ownerName: null,
+    ownerPhone: null,
+    ownerNationalId: null,
+    executionYear: null,
+    executionNumber: null,
+    date: null,
+  };
+  
   constructor(
     private _dialog: MatDialog,
     private _plateService: PlateService,
-    private _formBuilder: FormBuilder,
     private _printingService: PrintingServiceService
-    ){
-      this.searchForm = this._formBuilder.group({
-        carTypeId: '',
-        selectedYear: '',
-        selectedNumber: '', 
-      });
-    }
+    ){ }
+
 
   ngOnInit(): void {
     
-    this.getExecutedPlatesList();
+    this.getExecutedPlates();
     this.generateYears();
     this.generateNumbers();
 
@@ -57,7 +53,9 @@ export class ExecutedPlatesComponent implements OnInit {
       this.carTypes = data;
     });
   
-    
+    this._plateService.getExecutedCarStates().subscribe((data) => {
+      this.carStates = data;
+    });
   }
   
   generateYears(){
@@ -73,72 +71,53 @@ export class ExecutedPlatesComponent implements OnInit {
     }
   }
   
+  onPrevious(){
+    this.filterObj.pageIndex --;
+
+    if(this.filterObj.pageIndex < 1){
+      this.filterObj.pageIndex = 1;
+    }
+
+    this.getExecutedPlates();
+  }
+  
+  onNext(){
+    this.filterObj.pageIndex ++;
+    this.getExecutedPlates();
+  }
+
+  getExecutedPlates() {
+    this._plateService.getExecutedPlatesList(this.filterObj).subscribe({
+      next: (res) => {
+        this.executedPlates = res;
+      },
+      error: console.log,
+    });
+  }
+
   openAddEditExecutedPlateForm(data: any){
     if(data){
       const dialogRef = this._dialog.open(ExecutedPlatesAddEditComponent, {
         data: data
       });
       dialogRef.afterClosed().subscribe(result => {
-        this.getExecutedPlatesList();
+        this.getExecutedPlates();
       });
     }
     else{
       const dialogRef = this._dialog.open(ExecutedPlatesAddEditComponent);
       dialogRef.afterClosed().subscribe(result => {
-        this.getExecutedPlatesList();
+        this.getExecutedPlates();
       });
     }
   }
 
-  getExecutedPlatesList() {
-    this._plateService.getExecutedPlatesList().subscribe({
-      next: (res) => {
-        this.dataSource = new MatTableDataSource(res);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-      },
-      error: console.log,
-    });
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
-  
-
-  onSearchFormSubmit(){
-    if (this.searchForm.valid) {
-      this._plateService.getExecutedPlatesList(this.searchForm.value).subscribe({
-        next: (res) => {
-          this.dataSource = new MatTableDataSource(res);
-          this.dataSource.sort = this.sort;
-          this.dataSource.paginator = this.paginator;
-
-          if (res.length > 0) {
-            const firstCarType = res[0].carType;
-          
-            if (firstCarType != null) {
-              this.carTypeValue = firstCarType.type.toString();
-            }
-          }
-
-        },
-        error: console.log,
-      });
-    }
-
-  }
 
   deleteExecutedPlate(id: number){
     this._plateService.deleteExecutedPlate(id).subscribe({
       next: (res) =>{
         alert("تم الحذف بنجاح يا معلم..");
-        this.getExecutedPlatesList();
+        this.getExecutedPlates();
       }
     });
   }

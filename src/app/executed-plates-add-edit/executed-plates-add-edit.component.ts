@@ -13,7 +13,11 @@ import { ExecutedPlatesComponent } from '../executed-plates/executed-plates.comp
 })
 export class ExecutedPlatesAddEditComponent implements OnInit {
   plateForm: FormGroup;
+
+  years: any[] = [];
+  numbers: any[] = [];
   carTypes: any[] = [];
+  carStates: any[] = [];
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -25,6 +29,7 @@ export class ExecutedPlatesAddEditComponent implements OnInit {
       this.plateForm = this._formBuilder.group({
         id: Number ,
         carTypeId: Number,
+        executedCarStateId: Number,
         letters: '',
         numbers: '',
         date: Date,
@@ -35,14 +40,31 @@ export class ExecutedPlatesAddEditComponent implements OnInit {
     }
     
     ngOnInit(): void {
+      this.generateYears();
+      this.generateNumbers();
+  
       this._plateService.getCarTypes().subscribe((data) => {
         this.carTypes = data;
       });
-
+    
+      this._plateService.getExecutedCarStates().subscribe((data) => {
+        this.carStates = data;
+      });
     }
 
 
-
+    generateYears(){
+      const currentYear = new Date().getFullYear();
+      for (let year = 1980; year <= currentYear ; year++) {
+        this.years.push(year);
+      }
+    }
+  
+    generateNumbers(){
+      for (let num = 1; num <= 10; num++) {
+        this.numbers.push(num);
+      }
+    }
 
   onFormSubmit() {
     if (this.plateForm.valid) {
@@ -50,7 +72,7 @@ export class ExecutedPlatesAddEditComponent implements OnInit {
         next: (val: any) => {
           this._dialogref.close();
           alert('تمت الإضافة بنجاح يا برنس..');
-          this._executedPlatesComponent.getExecutedPlatesList();
+          this._executedPlatesComponent.getExecutedPlates();
         }
       });
     }

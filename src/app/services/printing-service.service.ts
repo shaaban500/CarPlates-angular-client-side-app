@@ -98,6 +98,10 @@ export class PrintingServiceService {
         .mg-top20{
           margin-top: 20px;
         }
+
+        .gap3{
+          gap: 3rem;
+        }
     `);
     printWindow?.document.write('</style>');
     
