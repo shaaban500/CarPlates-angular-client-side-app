@@ -20,6 +20,8 @@ export class ExecutedPlatesComponent implements OnInit {
   carTypes: any[] = [];
   executedPlates: any[] = [];
   carStates: any[] = [];
+  selectedCarType: string = '';
+  selectedCarState: string = '';
 
   filterObj = {
     pageIndex: 1,
@@ -125,4 +127,26 @@ export class ExecutedPlatesComponent implements OnInit {
   print(idDivToBePrint: string): void{
     this._printingService.printDivContent(idDivToBePrint);
   }
+
+  updateCarType() : void{
+    const carTypeId = +this.filterObj.carTypeId!; // Using ! to assert that it's not null
+    const filteredType = this.carTypes.find(type => type.id === carTypeId);
+    if (filteredType) {
+      this.selectedCarType = filteredType.type;
+    } else {
+      this.selectedCarType = ''; // Handle if no item is selected
+    }
+  }
+  
+
+  updateCarState(): void {
+    const carStateId = +this.filterObj.carStateId!; // Using ! to assert that it's not null
+    const filteredState = this.carStates.find(state => state.id === carStateId);
+    if (filteredState) {
+      this.selectedCarState = filteredState.state;
+    } else {
+      this.selectedCarState = ''; // Handle if no item is selected
+    }
+  }
+
 }

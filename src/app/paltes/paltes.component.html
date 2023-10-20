@@ -2,7 +2,7 @@
 <div class="flex-column align-center gap3 mg-top20">
   <div class="flex-column align-center gap3 width90">
     
-    <div class="flex-row width100 align-center justify-content-between font20px bg-white card-radius card-padding">
+    <div class="flex-row gap7 width100 align-center justify-content-between font20px bg-white card-radius card-padding">
       <div class="flex-row align-center gap5 width100">
         <div class="center gap1">
           <span class="material-symbols-rounded center cursor" (click)="onNext()">
@@ -27,7 +27,12 @@
             </select>
         </div>
       </div>
-      <!--<span class="flex-row justify-content-end width100 font20px bold700 primary padding1"> {{ carTypeValue }}  -  {{ carStateValue }} </span>-->
+
+      <button (click)="print('platesTable')" class="center gap1 bg-primary white padding1 card-radius font20px bold700 width200px">
+        <span class="material-symbols-rounded"> print </span>
+        <span> طباعة </span>
+      </button>
+
       <div class="flex-row justify-content-end width100">
         <button (click)="openAddEditPlateForm(null)" class="center gap1 bg-primary white padding1 card-radius font20px bold700">
           <span class="material-symbols-rounded"> add_box </span>
@@ -41,14 +46,14 @@
         
       <div class="width100">
         <label> نوع المركبة </label>
-        <select [(ngModel)]="filterObj.carTypeId" class="input-box width100">
+        <select [(ngModel)]="filterObj.carTypeId" class="input-box width100" (ngModelChange)="updateCarType()">
           <option *ngFor="let val of carTypes" [value]="val.id"> {{val.type}} </option>
         </select>
       </div>
       
       <div class="width100">
         <label> حالة المركبة </label>
-        <select [(ngModel)]="filterObj.carStateId" class="input-box width100">
+        <select [(ngModel)]="filterObj.carStateId" class="input-box width100" (ngModelChange)="updateCarState()">
           <option *ngFor="let val of carStates" [value]="val.id"> {{val.state}} </option>
         </select>
       </div>
@@ -79,7 +84,11 @@
     </div>
   
     <div id="platesTable" class="width100">
-      <table>
+      <div class="center gap3 width100 font20px">
+        <span> النوع: ({{ selectedCarType }}) </span>
+        <span> الحالة: ({{ selectedCarState }}) </span>
+      </div>
+      <table class="mg-top20">
         <thead>
           <tr>
             <th class="no-print ">ID</th>
@@ -117,12 +126,6 @@
 
       
     </div>
-    
-
-    <button (click)="print('platesTable')" class="center gap1 width10 bg-primary white padding1 card-radius font20px bold700 mg-bottom50">
-      <span class="material-symbols-rounded"> print </span>
-      <span> طباعة </span>
-    </button>
 
   </div>
 </div>
