@@ -61,7 +61,7 @@ export class ExecutedPlatesAddEditComponent implements OnInit {
     }
   
     generateNumbers(){
-      for (let num = 1; num <= 10; num++) {
+      for (let num = 1; num <= 100; num++) {
         this.numbers.push(num);
       }
     }

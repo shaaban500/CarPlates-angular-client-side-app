@@ -6,10 +6,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DailyReportService {
+  url : string = "https://localhost:7137/";
 
   constructor(private _http: HttpClient) { }
 
   getDailyReport(): Observable<any> {
-    return this._http.get('https://localhost:7137/CarPlates/GetDailyReport');
+    return this._http.get(this.url + 'DailyReport/GetDailyReport');
   }
 }
