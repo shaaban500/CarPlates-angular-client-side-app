@@ -58,7 +58,6 @@ export class PlateAddEditComponent implements OnInit {
 
   onFormSubmit() {
     if (this.plateForm.valid) {
-      console.log(this.plateForm.value);
       this._plateService.addPlate(this.plateForm.value).subscribe({
         next: (val: any) => {
           this._dialogref.close();

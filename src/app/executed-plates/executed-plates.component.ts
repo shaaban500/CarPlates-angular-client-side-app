@@ -149,4 +149,17 @@ export class ExecutedPlatesComponent implements OnInit {
     }
   }
 
+
+  columnClasses: { [key: string]: boolean } = {};
+
+  // Method to toggle the .no-print class for a specific column
+  toggleNoPrintClass(columnName: string) {
+    this.columnClasses[columnName] = !this.columnClasses[columnName];
+  }
+
+  // Method to check if the .no-print class is enabled for a specific column
+  isNoPrintClassEnabled(columnName: string): boolean {
+    return this.columnClasses[columnName];
+  }
+  
 }

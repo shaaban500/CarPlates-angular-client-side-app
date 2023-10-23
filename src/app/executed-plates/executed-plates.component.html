@@ -97,20 +97,60 @@
       <table class="mg-top20">
         <thead>
           <tr>
-            <th class="no-print hide">ID</th>
-            <th>الحروف</th>
-            <th>الأرقام</th>
-            <th>التاريخ</th>
+            <th (click)="toggleNoPrintClass('ID')" [ngClass]="{'no-print': isNoPrintClassEnabled('ID')}">ID
+              <button class="no-print" (click)="toggleNoPrintClass('ID')"></button>
+              <i class="material-symbols-rounded no-print success cursor" [ngClass]="{'enabled': isNoPrintClassEnabled('ID')}">print</i>
+              <i class="material-symbols-rounded no-print danger cursor" [ngClass]="{'disabled': !isNoPrintClassEnabled('ID')}">print_disabled</i>
+            </th>
+            <th (click)="toggleNoPrintClass('letters')" [ngClass]="{'no-print': isNoPrintClassEnabled('letters')}">الحروف
+              <button class="no-print" (click)="toggleNoPrintClass('letters')"></button>
+              <i class="material-symbols-rounded no-print success cursor"[ngClass]="{'enabled': isNoPrintClassEnabled('letters')}">print</i>
+              <i class="material-symbols-rounded no-print danger cursor" [ngClass]="{'disabled': !isNoPrintClassEnabled('letters')}">print_disabled</i>
+            </th>
+            <th (click)="toggleNoPrintClass('numbers')" [ngClass]="{'no-print': isNoPrintClassEnabled('numbers')}">الأرقام
+              <button class="no-print" (click)="toggleNoPrintClass('numbers')"></button>
+              <i class="material-symbols-rounded no-print success cursor" [ngClass]="{'enabled': isNoPrintClassEnabled('numbers')}">print</i>
+              <i class="material-symbols-rounded no-print danger cursor" [ngClass]="{'disabled': !isNoPrintClassEnabled('numbers')}">print_disabled</i>
+            </th>
+            <th (click)="toggleNoPrintClass('date')" [ngClass]="{'no-print': isNoPrintClassEnabled('date')}">التاريخ
+              <button class="no-print" (click)="toggleNoPrintClass('date')"></button>
+              <i class="material-symbols-rounded no-print success cursor" [ngClass]="{'enabled': isNoPrintClassEnabled('date')}">print</i>
+              <i class="material-symbols-rounded no-print danger cursor" [ngClass]="{'disabled': !isNoPrintClassEnabled('date')}">print_disabled</i>
+            </th>
+            <th (click)="toggleNoPrintClass('ownerName')" [ngClass]="{'no-print': isNoPrintClassEnabled('ownerName')}">اسم المالك
+              <button class="no-print" (click)="toggleNoPrintClass('ownerName')"></button>
+              <i class="material-symbols-rounded no-print success cursor" [ngClass]="{'enabled': isNoPrintClassEnabled('ownerName')}">print</i>
+              <i class="material-symbols-rounded no-print danger cursor" [ngClass]="{'disabled': !isNoPrintClassEnabled('ownerName')}">print_disabled</i>
+            </th>
+            <th (click)="toggleNoPrintClass('ownerNationalId')" [ngClass]="{'no-print': isNoPrintClassEnabled('ownerNationalId')}">الرقم القومي
+              <button class="no-print" (click)="toggleNoPrintClass('ownerNationalId')"></button>
+              <i class="material-symbols-rounded no-print success cursor" [ngClass]="{'enabled': isNoPrintClassEnabled('ownerNationalId')}">print</i>
+              <i class="material-symbols-rounded no-print danger cursor" [ngClass]="{'disabled': !isNoPrintClassEnabled('ownerNationalId')}">print_disabled</i>
+            </th>
+            <th (click)="toggleNoPrintClass('ownerPhone')" [ngClass]="{'no-print': isNoPrintClassEnabled('ownerPhone')}">رقم الهاتف
+              <button class="no-print" (click)="toggleNoPrintClass('ownerPhone')"></button>
+              <i class="material-symbols-rounded no-print success cursor" [ngClass]="{'enabled': isNoPrintClassEnabled('ownerPhone')}">print</i>
+              <i class="material-symbols-rounded no-print danger cursor" [ngClass]="{'disabled': !isNoPrintClassEnabled('ownerPhone')}">print_disabled</i>
+            </th>
+            <th (click)="toggleNoPrintClass('ownerAdress')" [ngClass]="{'no-print': isNoPrintClassEnabled('ownerAdress')}">العنوان
+              <button class="no-print" (click)="toggleNoPrintClass('ownerAdress')"></button>
+              <i class="material-symbols-rounded no-print success cursor" [ngClass]="{'enabled': isNoPrintClassEnabled('ownerAdress')}">print</i>
+              <i class="material-symbols-rounded no-print danger cursor" [ngClass]="{'disabled': !isNoPrintClassEnabled('ownerAdress')}">print_disabled</i>
+            </th>
             <th class="no-print">تعديل</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let row of executedPlates">
-            <td class="no-print hide">{{ row.id }}</td>
-            <td>{{ row.letters }}</td>
-            <td>{{ row.numbers }}</td>
-            <td>{{ row.date | date }}</td>
-            <td class="no-print center gap1 ">
+          <tr *ngFor="let row of executedPlates; let i = index">
+            <td [ngClass]="{'no-print': isNoPrintClassEnabled('ID')}">{{ i + 1 }}</td>
+            <td [ngClass]="{'no-print': isNoPrintClassEnabled('letters')}">{{ row.letters }}</td>
+            <td [ngClass]="{'no-print': isNoPrintClassEnabled('numbers')}">{{ row.numbers }}</td>
+            <td [ngClass]="{'no-print': isNoPrintClassEnabled('date')}">{{ row.date | date }}</td>
+            <td [ngClass]="{'no-print': isNoPrintClassEnabled('ownerName')}">{{ row.ownerName }}</td>
+            <td [ngClass]="{'no-print': isNoPrintClassEnabled('ownerNationalId')}">{{ row.ownerNationalId }}</td>
+            <td [ngClass]="{'no-print': isNoPrintClassEnabled('ownerPhone')}">{{ row.ownerPhone }}</td>
+            <td [ngClass]="{'no-print': isNoPrintClassEnabled('ownerAdress')}">{{ row.ownerAdress }}</td>
+            <td class="no-print center gap1">
               <button class="primary bg-white" (click)="openAddEditExecutedPlateForm(row)">
                 <span class="material-symbols-rounded">edit</span>
               </button>
@@ -121,7 +161,6 @@
           </tr>
         </tbody>
       </table>
-
       
     </div>
 

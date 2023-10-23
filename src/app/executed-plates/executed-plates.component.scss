@@ -1,0 +1,10 @@
+.enabled {
+    color: var(--color-danger);
+    display: none;
+}
+
+.disabled {
+    display: none;
+    color: var(--color-success);
+  }
+  
