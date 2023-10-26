@@ -78,6 +78,9 @@ export class ExecutedPlatesAddEditComponent implements OnInit {
           this._dialogref.close();
           alert('تمت الإضافة بنجاح يا برنس..');
           this._executedPlatesComponent.getExecutedPlates();
+        },
+        error: (err: any) => {
+          alert('حدث خطأ ما أو هذه اللوحة موجودة مسبقا...');        
         }
       });
     }

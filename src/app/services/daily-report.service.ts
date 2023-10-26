@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DailyReportService {
-  url : string = "https://localhost:7137/";
+  url : string = "http://192.168.1.60:8081";
 
   constructor(private _http: HttpClient) { }
 

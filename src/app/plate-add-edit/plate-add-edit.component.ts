@@ -65,7 +65,7 @@ export class PlateAddEditComponent implements OnInit {
           this._platesComponent.getPlates();
         },
         error: (err: any) => {
-          console.error(err);
+          alert('حدث خطأ ما أو هذه اللوحة موجودة مسبقا...');        
         }
       });
     }
